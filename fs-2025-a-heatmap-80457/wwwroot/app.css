@@ -64,24 +64,25 @@ h1:focus {
 
 /* Heatmap color scale */
 .heatmap-0 {
-    background-color: #f2f2f2; /* Light gray */
+    background-color: #ffe5e5; /* Very light red */
 }
 
 .heatmap-5 {
-    background-color: #c6e48b; /* Pale green */
+    background-color: #ffb3b3; /* Light red */
 }
 
 .heatmap-10 {
-    background-color: #7bc96f; /* Medium green */
+    background-color: #ff8080; /* Medium red */
 }
 
 .heatmap-15 {
-    background-color: #239a3b; /* Dark green */
+    background-color: #ff4d4d; /* Dark red */
     color: white;
 }
 
 .heatmap-20 {
-    background-color: #196127; /* Very dark green */
+    background-color: #b30000; /* Very dark red */
     color: white;
 }
+
 
