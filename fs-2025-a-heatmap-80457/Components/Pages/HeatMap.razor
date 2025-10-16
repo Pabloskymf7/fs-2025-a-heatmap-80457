@@ -1,0 +1,20 @@
+﻿@page "/heatmap"
+@using fs_2025_a_heatmap_80457.Components.Data
+@using fs_2025_a_heatmap_80457.Components.Pages
+
+<PageTitle>Heatmap</PageTitle>
+
+<h3>Heatmap Demo Page</h3>
+
+<HeatMapDemo DataPoints="@heatmapData" />
+
+@code {
+    private List<HeatMapDataPoint> heatmapData = new()
+    {
+        new HeatMapDataPoint { Label = "Item 1", Value = 0 },
+        new HeatMapDataPoint { Label = "Item 2", Value = 5 },
+        new HeatMapDataPoint { Label = "Item 3", Value = 10 },
+        new HeatMapDataPoint { Label = "Item 4", Value = 15 },
+        new HeatMapDataPoint { Label = "Item 5", Value = 20 },
+    };
+}

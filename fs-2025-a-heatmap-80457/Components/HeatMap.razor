@@ -1,0 +1,26 @@
+﻿
+@using System.Collections.Generic
+@using fs_2025_a_heatmap_80457.Components.Data
+
+<table class="heatmap-table">
+    <thead>
+        <tr>
+            <th>Label</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in DataPoints)
+        {
+            <tr>
+                <td>@item.Label</td>
+                <td class="heatmap-@item.Value">@item.Value</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<HeatMapDataPoint> DataPoints { get; set; } = new();
+}
