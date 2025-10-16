@@ -3,13 +3,26 @@
 @if (DataPointsGrid != null && DataPointsGrid.Any())
 {
     <table class="heatmap-table">
+        <thead>
+            <tr>
+                <th>Day / Week</th>
+                @foreach (var week in Weeks)
+                {
+                    <th>W@week</th>
+                }
+            </tr>
+        </thead>
         <tbody>
-            @foreach (var row in DataPointsGrid)
+            @foreach (var day in Days)
             {
                 <tr>
-                    @foreach (var cell in row)
+                    <td>@day</td>
+                    @foreach (var week in Weeks)
                     {
-                        <td class="heatmap-@cell.Value" title="@cell.Label">@cell.Value</td>
+                        var point = DataPointsGrid.FirstOrDefault(p => p.Day == day && p.Week == week);
+                        <td class="heatmap-@(point?.Value ?? 0)" title="@(point?.Value ?? 0)">
+                            @(point?.Value ?? 0)
+                        </td>
                     }
                 </tr>
             }
@@ -22,6 +35,9 @@ else
 }
 
 @code {
-    [Parameter]
-    public List<List<HeatMapDataPoint>> DataPointsGrid { get; set; } = new();
+    [Parameter] public List<HeatMapDataPoint> DataPointsGrid { get; set; } = new();
+
+    // Optional: generate unique weeks and days
+    private List<int> Weeks => DataPointsGrid.Select(p => p.Week).Distinct().OrderBy(w => w).ToList();
+    private List<string> Days => DataPointsGrid.Select(p => p.Day).Distinct().ToList();
 }

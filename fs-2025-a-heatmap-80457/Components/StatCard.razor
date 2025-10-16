@@ -1,0 +1,28 @@
+﻿@using fs_2025_a_heatmap_80457.Components
+
+<div class="stat-card" role="region" aria-label="@AriaLabel" @onclick="OnClickHandler">
+    @if (Loading)
+    {
+        <div class="stat-card-loading">Loading...</div>
+    }
+    else
+    {
+        <div class="stat-card-icon">@Icon</div>
+        <div class="stat-card-number">@Number</div>
+        <div class="stat-card-label">@Label</div>
+    }
+</div>
+
+@code {
+    [Parameter] public string Label { get; set; } = string.Empty;
+    [Parameter] public string Number { get; set; } = string.Empty;
+    [Parameter] public RenderFragment? Icon { get; set; }
+    [Parameter] public EventCallback OnClick { get; set; }
+    [Parameter] public bool Loading { get; set; } = false;
+    [Parameter] public string AriaLabel { get; set; } = string.Empty;
+
+    private async Task OnClickHandler()
+    {
+        if (OnClick.HasDelegate) await OnClick.InvokeAsync(null);
+    }
+}

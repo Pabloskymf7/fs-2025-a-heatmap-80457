@@ -2,31 +2,29 @@
 @using fs_2025_a_heatmap_80457.Components
 @using fs_2025_a_heatmap_80457.Components.Data
 
-<PageTitle>Heatmap Demo</PageTitle>
+<h3>Heatmap Demo: Days × Weeks</h3>
 
-<h3>Heatmap Demo Page</h3>
-
-<HeatMapGrid DataPointsGrid="@heatmapDataGrid" />
+<HeatMapGrid DataPointsGrid="@heatmapData" />
 
 @code {
-    private List<List<HeatMapDataPoint>> heatmapDataGrid = new();
+    private List<HeatMapDataPoint> heatmapData = new();
+    private string[] days = new[] { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    private int weeksCount = 5; // 5 weeks demo
 
     protected override void OnInitialized()
     {
-        var random = new Random();
-        for (int row = 0; row < 4; row++) // 4 rows
+        var rnd = new Random();
+        foreach (var day in days)
         {
-            var rowData = new List<HeatMapDataPoint>();
-            for (int col = 0; col < 5; col++) // 5 columns
+            for (int w = 1; w <= weeksCount; w++)
             {
-                rowData.Add(new HeatMapDataPoint
+                heatmapData.Add(new HeatMapDataPoint
                 {
-                    Label = $"R{row + 1}C{col + 1}",
-                    Value = new[] { 0, 5, 10, 15, 20 }[random.Next(5)]
+                    Day = day,
+                    Week = w,
+                    Value = new[] { 0, 5, 10, 15, 20 }[rnd.Next(5)]
                 });
             }
-            heatmapDataGrid.Add(rowData);
         }
     }
 }
-
