@@ -6,16 +6,27 @@
 
 <h3>Heatmap Demo Page</h3>
 
-<HeatMapComponent DataPoints="@heatmapData" />
+<HeatMapGrid DataPointsGrid="@heatmapDataGrid" />
 
 @code {
-    private List<HeatMapDataPoint> heatmapData = new()
+    private List<List<HeatMapDataPoint>> heatmapDataGrid = new();
+
+    protected override void OnInitialized()
     {
-        new HeatMapDataPoint { Label = "Item 1", Value = 0 },
-        new HeatMapDataPoint { Label = "Item 2", Value = 5 },
-        new HeatMapDataPoint { Label = "Item 3", Value = 10 },
-        new HeatMapDataPoint { Label = "Item 4", Value = 15 },
-        new HeatMapDataPoint { Label = "Item 5", Value = 20 },
-    };
+        var random = new Random();
+        for (int row = 0; row < 4; row++) // 4 rows
+        {
+            var rowData = new List<HeatMapDataPoint>();
+            for (int col = 0; col < 5; col++) // 5 columns
+            {
+                rowData.Add(new HeatMapDataPoint
+                {
+                    Label = $"R{row + 1}C{col + 1}",
+                    Value = new[] { 0, 5, 10, 15, 20 }[random.Next(5)]
+                });
+            }
+            heatmapDataGrid.Add(rowData);
+        }
+    }
 }
 
